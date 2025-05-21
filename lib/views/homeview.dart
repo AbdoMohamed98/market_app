@@ -19,12 +19,13 @@ class Homeview extends StatelessWidget {
       ),
       body:  
       Padding(
-        padding: const EdgeInsets.only(top:70),
+        padding: const EdgeInsets.only(top:70,left: 10,right: 10),
         child: GridView.builder(
+          clipBehavior: Clip.none,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 70,
-            crossAxisSpacing:5,
+            crossAxisSpacing:1,
             childAspectRatio: 1.5,
           ),
           itemBuilder:(context, index) =>  Stack(
@@ -48,9 +49,12 @@ class Homeview extends StatelessWidget {
                         child: SizedBox(
                           height: 100,
                           width: 100,
-                          child: Image.asset(
-                            'assets/generated.png',
-                            fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(
+                              'assets/generated.png',
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
