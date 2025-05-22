@@ -1,17 +1,15 @@
-import 'dart:convert';
+import 'package:market_app/helper/api.dart';
+import 'package:market_app/models/productmodel.dart';
 
-import 'package:http/http.dart' as http;
+class AllProduct {
+  Future<List<Productmodel>> getAllProducts() async {
+    List data = await Api().get(urladdress: 'https://fakestoreapi.com/products');
+    List<Productmodel> productList = [];
 
-class Getallproduct {
-  Future<List<dynamic>> getAllProductService() async {
-    var url = Uri.parse('https://fakestoreapi.com/products/categories');
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-     
-      return data;
-    } else {
-      throw Exception('Failed to load products');
+    for (int i = 0; i < data.length; i++) {
+      productList.add(Productmodel.fromJson(data[i]));
     }
+
+    return productList;
   }
 }
